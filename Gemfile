@@ -5,6 +5,8 @@ gem 'rails', '~> 7.2.1'
 
 gem 'bootsnap', require: false
 gem 'cssbundling-rails'
+gem 'devise'
+gem 'devise-i18n'
 gem 'haml-rails'
 gem 'image_processing'
 gem 'jbuilder'
@@ -20,6 +22,8 @@ gem 'turbo-rails'
 group :development, :test do
   gem 'brakeman', require: false
   gem 'debug', platforms: %i[mri windows], require: 'debug/prelude'
+  gem 'factory_bot_rails'
+  gem 'rspec-rails'
 end
 
 group :development do
@@ -32,7 +36,5 @@ end
 
 group :test do
   gem 'capybara'
-  gem 'factory_bot_rails'
-  gem 'rspec-rails'
   gem 'selenium-webdriver'
 end

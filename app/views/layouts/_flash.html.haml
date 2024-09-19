@@ -1,0 +1,4 @@
+- flash.each do |key, value|
+  - alert_class = flash_variant(key)
+  .alert{ class: "alert-#{alert_class}" }
+    = value

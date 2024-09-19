@@ -1,0 +1,17 @@
+%header.navbar.navbar-expand-lg.navbar-dark.mb-3.bg-dark
+  .container-fluid
+    = link_to 'railsEC', root_path, class: 'navbar-brand'
+    .d-flex.align-items-center
+      - if admin_signed_in?
+        .navbar-text.me-2
+          = current_admin.email
+        = link_to t('common.views.header.admins.orders_manage'), '#', class: 'btn btn-primary me-3'
+        = button_to t('common.view.header.logout'), destroy_admin_session_path, method: :delete,
+                                                                                data: { turbo_confirm: t('common.view.header.confirm_logout') },
+                                                                                class: 'btn btn-primary'
+      - else
+        .navbar-text.me-2
+          = link_to '#', class: 'btn btn-primary me-3' do
+            %i.fa-solid.fa-cart-shopping
+        = link_to t('common.views.header.login'), '#', class: 'btn btn-primary me-3'
+        = link_to t('common.views.header.sign_up'), '#', class: 'btn btn-primary'
