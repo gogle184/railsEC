@@ -22,6 +22,8 @@ gem 'turbo-rails'
 group :development, :test do
   gem 'brakeman', require: false
   gem 'debug', platforms: %i[mri windows], require: 'debug/prelude'
+  gem 'factory_bot_rails'
+  gem 'rspec-rails'
 end
 
 group :development do
@@ -34,7 +36,5 @@ end
 
 group :test do
   gem 'capybara'
-  gem 'factory_bot_rails'
-  gem 'rspec-rails'
   gem 'selenium-webdriver'
 end
