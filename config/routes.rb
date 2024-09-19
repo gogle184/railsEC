@@ -1,12 +1,17 @@
 Rails.application.routes.draw do
   root to: 'top#index'
-  namespace :admins do
-    resources :products
-  end
   devise_for :admins, only: [:session],
                       controllers: {
                         sessions: 'admins/sessions',
                       }
+  devise_for :users, controllers: {
+    registrations: 'users/registrations',
+    sessions: 'users/sessions',
+    confirmations: 'users/confirmations',
+  }
+  namespace :admins do
+    resources :products
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
