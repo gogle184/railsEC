@@ -75,6 +75,12 @@ ja:
         greeting: "%{recipient}様"
         instruction: 以下のリンクをクリックし、メールアドレスの確認手続を完了させてください。
         subject: メールアドレス確認メール
+        message_html: |-
+          <p>%{name}様</p>
+          <p>以下のリンクをクリックし、メールアドレスの確認手続を完了させてください。</p>
+          <p>
+            <a href="%{confirmation_url}">メールアドレスの確認</a>
+          </p>
       email_changed:
         greeting: こんにちは、%{recipient}様。
         message: メールアドレスの（%{email}）変更が完了したため、メールを送信しています。
@@ -91,6 +97,14 @@ ja:
         instruction_2: パスワード再設定の依頼をしていない場合、このメールを無視してください。
         instruction_3: パスワードの再設定は、上のリンクから新しいパスワードを登録するまで完了しません。
         subject: パスワードの再設定について
+        message_html: |-
+          <p>%{name}様</p>
+          <p>パスワード再設定の依頼を受けたため、メールを送信しています。下のリンクからパスワードの再設定ができます。</p>
+          <p>
+            <a href="%{edit_password_url}">パスワード変更</a>
+          </p>
+          <p>パスワード再設定の依頼をしていない場合、このメールを無視してください。</p>
+          <p>パスワードの再設定は、上のリンクから新しいパスワードを登録するまで完了しません。</p>
       unlock_instructions:
         action: アカウントのロック解除
         greeting: "%{recipient}様"
@@ -108,7 +122,7 @@ ja:
         new_password: 新しいパスワード
       new:
         forgot_your_password: パスワードを忘れましたか？
-        send_me_reset_password_instructions: パスワードの再設定方法を送信する
+        send_me_reset_password_instructions: パスワードを再設定する
       no_token: このページにはアクセスできません。パスワード再設定メールのリンクからアクセスされた場合には、URL をご確認ください。
       send_instructions: パスワードの再設定について数分以内にメールでご連絡いたします。
       send_paranoid_instructions: メールアドレスが登録済みの場合、パスワード再設定用のメールが数分以内に送信されます。
@@ -141,7 +155,7 @@ ja:
     sessions:
       already_signed_out: 既にログアウト済みです。
       new:
-        sign_in: ログイン
+        sign_in: ログインする
       signed_in: ログインしました。
       signed_out: ログアウトしました。
     shared:

@@ -6,7 +6,7 @@ class User < ApplicationRecord
 
   validates :display_name, presence: true, length: { maximum: 30 }, uniqueness: true
   validates :name, presence: true, length: { maximum: 30 }
-  validates :phone_number, presence: true, numericality: {only_integer: true, greater_than_or_equal_to: 0}
-  validates :postal_code, presence: true, length: { maximum: 7 }, numericality: {only_integer: true, greater_than_or_equal_to: 0}
+  validates :phone_number, presence: true, numericality: { only_integer: true }
+  validates :postal_code, presence: true, numericality: { only_integer: true }, length: { maximum: 7 }
   validates :address, presence: true, length: { maximum: 128 }
 end

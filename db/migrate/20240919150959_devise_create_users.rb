@@ -9,8 +9,8 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.2]
 
       t.string :display_name, null: false, default: ''
       t.string :name, null: false, default: ''
-      t.integer :phone_number, null: false, default: ''
-      t.integer :postal_code, null: false, default: ''
+      t.string :phone_number, null: false, default: ''
+      t.string :postal_code, null: false, default: ''
       t.string :address, null: false, default: ''
 
       ## Recoverable

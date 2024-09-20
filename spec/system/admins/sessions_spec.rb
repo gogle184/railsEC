@@ -8,13 +8,13 @@ RSpec.describe 'Admins::Sessions', type: :system do
       visit new_admin_session_path
       fill_in 'メールアドレス', with: 'hoge'
       fill_in 'パスワード', with: 'password'
-      click_on 'ログイン'
+      click_on 'ログインする'
 
       expect(page).to have_content 'メールアドレスまたはパスワードが違います。'
 
       fill_in 'メールアドレス', with: 'admin@example.com'
       fill_in 'パスワード', with: 'password'
-      click_on 'ログイン'
+      click_on 'ログインする'
 
       expect(page).to have_content 'ログインしました。'
       expect(page).to have_current_path admins_products_path, ignore_query: true
