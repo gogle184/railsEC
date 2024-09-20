@@ -3,6 +3,7 @@ ja:
     models:
       admin: 管理者
       user: ユーザー
+      product: 商品
     attributes:
       admin:
         email: メールアドレス
@@ -15,3 +16,14 @@ ja:
         address: 住所
         email: メールアドレス
         password: パスワード
+      product:
+        name: 商品名
+        price: 価格
+        description: 商品説明
+        image: 商品画像
+        display: 公開フラグ
+  booleans:
+    product:
+      display:
+        true: 公開済み
+        false: 非公開

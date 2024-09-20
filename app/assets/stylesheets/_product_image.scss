@@ -1,0 +1,15 @@
+.product-img-small {
+  border: 2px solid #E0E0E0;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background-color: #F5F5DC;
+  object-fit: cover;
+}
+
+.product-img-large {
+  border: 2px solid #E0E0E0;
+  width: 300px; /* 画像の幅を固定 */
+  height: 300px; /* 画像の高さを固定 */
+  object-fit: contain; /* 画像が枠内に収まるようにする */
+  background-color: #F5F5DC;
+}

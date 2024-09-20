@@ -1,0 +1,21 @@
+.container
+  = link_to t('common.view.action.back'), admins_products_path, class: 'btn btn-primary'
+  %h1.mt-3= t('product.show.title')
+  .d-flex.gap-3.mb-3
+    = link_to t('product.edit.title'), edit_admins_product_path(@product), class: 'btn btn-primary'
+    = button_to t('product.destroy.title'), admins_product_path(@product), method: :delete,
+                                                                           data: { turbo_confirm: t('common.view.action.confirm_delete') },
+                                                                           class: 'btn btn-danger'
+  .d-flex.justify-content-start
+    .flex-shrink-0
+      = product_image_tag(@product, :large)
+    .ms-5
+      .fs-2= Product.human_attribute_name(:name)
+      .fs-5= @product.name
+      .mt-3
+        .fs-4= Product.human_attribute_name(:price)
+        %p= number_to_currency(@product.add_tax_price)
+        .fs-4= Product.human_attribute_name(:display)
+        %p= product_boolean(@product, :display)
+        .fs-4= Product.human_attribute_name(:description)
+        = @product.description
