@@ -183,5 +183,8 @@ ja:
   common:
     view:
       header:
+        sign_up: 新規登録
+        log_in: ログイン
         logout: ログアウト
         confirm_logout: ログアウトしますか？
+        user_name: "%{name}"

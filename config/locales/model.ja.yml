@@ -1,0 +1,17 @@
+ja:
+  activerecord:
+    models:
+      admin: 管理者
+      user: ユーザー
+    attributes:
+      admin:
+        email: メールアドレス
+        password: パスワード
+      user:
+        display_name: ユーザー名
+        name: 登録者名
+        phone_number: 電話番号
+        postal_code: 郵便番号
+        address: 住所
+        email: メールアドレス
+        password: パスワード
