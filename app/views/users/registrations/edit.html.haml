@@ -1,0 +1,38 @@
+.row.justify-content-center
+  .col-6
+    .card.card-body
+      .fs-4.mb-3= t('devise.registrations.edit.title')
+      = simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+        .form-inputs
+          = f.input :display_name,
+                    autofocus: true,
+                    hint: t('devise.registrations.edit.leave_blank_if_you_don_t_want_to_change_it'),
+                    input_html: { autocomplete: 'display_name' }
+          = f.input :name,
+                    hint: t('devise.registrations.edit.leave_blank_if_you_don_t_want_to_change_it'),
+                    input_html: { autocomplete: 'name' }
+          = f.input :phone_number,
+                    hint: t('devise.registrations.edit.leave_blank_if_you_don_t_want_to_change_it'),
+                    input_html: { autocomplete: 'phone_number' }
+          = f.input :postal_code,
+                    hint: t('devise.registrations.edit.leave_blank_if_you_don_t_want_to_change_it'),
+                    input_html: { autocomplete: 'postal_code' }
+          = f.input :address,
+                    hint: t('devise.registrations.edit.leave_blank_if_you_don_t_want_to_change_it'),
+                    input_html: { autocomplete: 'address' }
+          = f.input :email,
+                    autofocus: true,
+                    input_html: { autocomplete: 'email' }
+          = f.input :password,
+                    requred: false,
+                    hint: t('devise.registrations.edit.leave_blank_if_you_don_t_want_to_change_it'),
+                    input_html: { autocomplete: 'new-password' }
+          = f.input :password_confirmation,
+                    required: false,
+                    input_html: { autocomplete: 'new-password' }
+          = f.input :current_password,
+                    hint: t('devise.registrations.edit.we_need_your_current_password_to_confirm_your_changes'),
+                    input_html: { autocomplete: 'current-password' }
+        .form-actions.mb-3
+          = f.button :submit, t('devise.registrations.edit.update'), class: 'btn btn-primary'
+        = button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete

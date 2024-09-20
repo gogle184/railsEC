@@ -127,6 +127,10 @@ ja:
         we_need_your_current_password_to_confirm_your_changes: 変更を反映するには現在のパスワードを入力してください
       new:
         sign_up: アカウント登録
+        password: "%{count}文字以上で入力してください"
+      display_name: サイト内で表示するユーザー名
+      name: 配送先のお名前
+      number_format: 半角数字のみ入力してください
       signed_up: アカウント登録が完了しました。
       signed_up_but_inactive: ログインするためには、アカウントを有効化してください。
       signed_up_but_locked: アカウントがロックされているためログインできません。

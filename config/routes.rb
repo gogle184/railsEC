@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     registrations: 'users/registrations',
     sessions: 'users/sessions',
     confirmations: 'users/confirmations',
+    passwords: 'users/passwords'
   }
   namespace :admins do
     resources :products
