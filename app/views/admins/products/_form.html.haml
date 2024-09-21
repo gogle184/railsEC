@@ -1,0 +1,14 @@
+-# locals: (product:)
+
+.d-flex.justify-content-start
+  .flex-shrink-0
+    = product_image_tag(product, :large)
+  .ms-5
+    = simple_form_for [:admins, product], html: { multipart: true } do |f|
+      = f.error_notification
+      = f.input :image, as: :file
+      = f.input :name
+      = f.input :price, as: :string, hint: t('common.hint.tax')
+      = f.input :display, as: :boolean
+      = f.input :description, as: :text, input_html: { rows: 10 }
+      = f.submit class: 'btn btn-primary'

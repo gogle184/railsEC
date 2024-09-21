@@ -1,13 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe 'Users::Passwords', type: :system do
-  let(:user) { create(:user, :unconfirmed_user, email: 'example@example.com', password: 'password') }
-
   it 'パスワード再設定ができること' do
+    create(:user, :unconfirmed_user, email: 'example@example.com', password: 'password')
+
     visit new_user_password_path
     fill_in 'user[email]', with: 'example@example.com'
     click_on 'パスワードを再設定する'
-
     expect(page).to have_content 'パスワードの再設定について数分以内にメールでご連絡いたします'
 
     mail = ActionMailer::Base.deliveries.last

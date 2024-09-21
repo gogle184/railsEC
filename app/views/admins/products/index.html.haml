@@ -1,2 +1,13 @@
-%h1 Admins::Products#index
-%p Find me in app/views/admins/products/index.html.haml
+.container
+  %h1.mt-2= t('product.index.title')
+  = link_to t('product.new.title'), new_admins_product_path, class: 'btn btn-primary mb-4'
+  .row.row-cols-1.row-cols-md-2.row-cols-lg-4.g-3
+    - @products.each do |product|
+      = link_to admins_product_path(product), class: 'text-decoration-none' do
+        .card.h-100
+          = product_image_tag(product, :small)
+          .card-body
+            .card-title
+              = product.name
+            .card-text
+              = number_to_currency(product.add_tax_price)

@@ -188,3 +188,28 @@ ja:
         logout: ログアウト
         confirm_logout: ログアウトしますか？
         user_name: "%{name}"
+      action:
+        back: 戻る
+        confirm_delete: 本当に削除しますか？
+    hint:
+      tax: 税込価格(価格×1.10)で表示されます。ご注意ください。
+    controller:
+      create:
+        success: "%{model}を登録しました"
+        failure: "%{model}の登録に失敗しました"
+      update:
+        success: "%{model}を更新しました"
+        failure: "%{model}の更新に失敗しました"
+      destroy:
+        success: "%{model}を削除しました"
+  product:
+    index:
+      title: 商品一覧
+    new:
+      title: 商品登録
+    show:
+      title: 商品詳細
+    edit:
+      title: 商品編集
+    destroy:
+      title: 商品削除

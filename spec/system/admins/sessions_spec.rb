@@ -6,14 +6,14 @@ RSpec.describe 'Admins::Sessions', type: :system do
   describe 'ログイン' do
     it 'ログインできること' do
       visit new_admin_session_path
-      fill_in 'メールアドレス', with: 'hoge'
-      fill_in 'パスワード', with: 'password'
+      fill_in 'admin[email]', with: 'hoge'
+      fill_in 'admin[password]', with: 'password'
       click_on 'ログインする'
 
       expect(page).to have_content 'メールアドレスまたはパスワードが違います。'
 
-      fill_in 'メールアドレス', with: 'admin@example.com'
-      fill_in 'パスワード', with: 'password'
+      fill_in 'admin[email]', with: 'admin@example.com'
+      fill_in 'admin[password]', with: 'password'
       click_on 'ログインする'
 
       expect(page).to have_content 'ログインしました。'
