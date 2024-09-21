@@ -1,0 +1,14 @@
+.container
+  = link_to t('common.view.action.back'), admins_users_path, class: 'btn btn-primary'
+  %h1.mt-2= t('user.show.title')
+  .row.justify-content-center
+    .col-10
+      .card.mt-3
+        .card-body
+          %p #{User.human_attribute_name(:email)}: #{@user.email}
+          %p #{User.human_attribute_name(:display_name)}: #{@user.display_name}
+          %p #{User.human_attribute_name(:name)}: #{@user.name}
+          %p #{User.human_attribute_name(:phone_number)}: #{@user.phone_number}
+          %p #{User.human_attribute_name(:postal_code)}: #{@user.postal_code}
+          %p #{User.human_attribute_name(:address)}: #{@user.address}
+          = link_to t('user.edit.title'), edit_admins_user_path(@user), class: 'btn btn-primary'

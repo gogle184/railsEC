@@ -5,6 +5,8 @@
       - if admin_signed_in?
         .navbar-text.me-2
           = current_admin.email
+        = link_to t('common.view.header.product_management'), admins_products_path, class: 'btn btn-primary me-3'
+        = link_to t('common.view.header.user_management'), admins_users_path, class: 'btn btn-primary me-3'
         = button_to t('common.view.header.logout'), destroy_admin_session_path, method: :delete,
                                                                                 data: { turbo_confirm: t('common.view.header.confirm_logout') },
                                                                                 class: 'btn btn-primary'

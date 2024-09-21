@@ -1,0 +1,26 @@
+.row.justify-content-center
+  .col-6
+    .card.card-body
+      .fs-4.mb-3= t('user.edit.target_user', name: user.display_name)
+      = simple_form_for [:admins, user] do |f|
+        .form-inputs
+          = f.error_notification
+          = f.input :email,
+                    autofocus: true,
+                    input_html: { autocomplete: 'email' }
+          = f.input :display_name,
+                    autofocus: true,
+                    hint: t('devise.registrations.display_name'),
+                    input_html: { autocomplete: 'display_name' }
+          = f.input :name,
+                    input_html: { autocomplete: 'name' }
+          = f.input :phone_number,
+                    hint: t('devise.registrations.number_format'),
+                    input_html: { autocomplete: 'phone_number' }
+          = f.input :postal_code,
+                    hint: t('devise.registrations.number_format'),
+                    input_html: { autocomplete: 'postal_code' }
+          = f.input :address,
+                    input_html: { autocomplete: 'address' }
+        .form-actions.mb-3
+          = f.button :submit, t('devise.registrations.edit.update'), class: 'btn btn-primary'

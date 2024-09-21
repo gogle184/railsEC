@@ -188,9 +188,13 @@ ja:
         logout: ログアウト
         confirm_logout: ログアウトしますか？
         user_name: "%{name}"
+        user_management: ユーザー管理
+        product_management: 商品管理
       action:
         back: 戻る
         confirm_delete: 本当に削除しますか？
+        show: 詳細
+        destroy: 削除
     hint:
       tax: 税込価格(価格×1.10)で表示されます。ご注意ください。
     controller:
@@ -213,3 +217,16 @@ ja:
       title: 商品編集
     destroy:
       title: 商品削除
+  user:
+    index:
+      title: ユーザー一覧
+    show:
+      title: ユーザー詳細
+    edit:
+      title: ユーザー編集
+      target_user: "編集ユーザー: %{name}"
+    destroy:
+      title: ユーザー削除
+    confirmed_at:
+      'true': 認証済
+      'false': 未認証
