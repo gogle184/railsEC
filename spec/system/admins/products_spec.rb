@@ -82,4 +82,18 @@ RSpec.describe 'Admins::Products', type: :system do
       expect(page).not_to have_content '2,200円'
     end
   end
+
+  describe '並び替え', :js do
+    it '商品を並び替えできること' do
+      create(:product, name: '商品A', position: 1)
+      create(:product, name: '商品B', position: 2)
+
+      visit admins_products_path
+
+      find('.card', text: '商品A').drag_to(find('.card', text: '商品B'))
+      visit admins_products_path
+      expect(find('.card:nth-of-type(1)')).to have_content('商品B')
+      expect(find('.card:nth-of-type(2)')).to have_content('商品A')
+    end
+  end
 end

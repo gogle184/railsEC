@@ -6,7 +6,7 @@ module ProductHelper
                 asset_path(default_image)
               end
 
-    cover_img_class = variant == :large ? 'product-img-large' : 'product-img-small'
+    cover_img_class = variant == :large ? 'product-img-large' : 'product-img-small img_fluid'
 
     image_tag(img_url, alt: '画像', class: cover_img_class)
   end

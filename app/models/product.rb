@@ -8,8 +8,10 @@ class Product < ApplicationRecord
   validates :price, presence: true, numericality: { only_integer: true, less_than: 1_000_000 }
   validates :description, presence: true, length: { maximum: 10000 }
 
-  scope :order_by_oldest, -> { order(:id) }
+  scope :order_by_position, -> { order(:position) }
   scope :displayed, -> { where(display: true) }
+
+  acts_as_list
 
   def add_tax_price
     (self.price * 1.10).floor

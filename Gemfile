@@ -3,6 +3,7 @@ ruby '3.3.5'
 
 gem 'rails', '~> 7.2.1'
 
+gem 'acts_as_list'
 gem 'bootsnap', require: false
 gem 'cssbundling-rails'
 gem 'devise'
