@@ -1,7 +1,7 @@
 class Cart::CartItemsController < ApplicationController
   def create
     product = Product.find(params[:cart_item][:product_id])
-    cart_item = CartItem.add_or_update(cart: current_cart, product: product, quantity: quantity)
+    cart_item = CartItem.add_or_update(cart: current_cart, product:, quantity:)
 
     if cart_item.save
       redirect_to cart_path, notice: '商品をカートに追加しました'

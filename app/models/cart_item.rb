@@ -7,7 +7,7 @@ class CartItem < ApplicationRecord
   scope :order_by_oldest, -> { order(:id) }
 
   def self.add_or_update(cart:, product:, quantity:)
-    cart_item = cart.cart_items.find_or_initialize_by(product: product)
+    cart_item = cart.cart_items.find_or_initialize_by(product:)
     if cart_item.persisted?
       cart_item.quantity += quantity.to_i
     else

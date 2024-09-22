@@ -19,7 +19,6 @@ class Cart < ApplicationRecord
     guest_cart.destroy
   end
 
-
   def total_price
     cart_items.sum { |item| item.quantity * item.product.price }
   end
@@ -42,7 +41,7 @@ class Cart < ApplicationRecord
   end
 
   def shipping_fee
-    600 + (total_quantity / 5 ).ceil * 600
+    600 + ((total_quantity / 5).ceil * 600)
   end
 
   def final_total_price
