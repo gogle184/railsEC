@@ -230,3 +230,6 @@ ja:
     confirmed_at:
       'true': 認証済
       'false': 未認証
+  cart:
+    show:
+      title: カート一覧

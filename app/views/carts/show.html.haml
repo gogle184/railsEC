@@ -1,0 +1,26 @@
+.container
+  .row.mb-3
+    .col-10
+      = link_to t('common.view.action.back'), root_path, class: 'btn btn-primary'
+      %h1.mb-3= t('cart.show.title')
+      - if @cart_items.present?
+        - @cart_items.each do |cart_item|
+          .d-flex.mb-3.border-bottom
+            .col-md-2
+              = product_image_tag(cart_item.product, :small)
+            .col-md-7.ms-5
+              %h5= cart_item.product.name
+              %p= cart_item.product.price
+              = simple_form_for cart_item, url: cart_cart_item_path(cart_item), method: :patch, html: { novalidate: true } do |f|
+                .col-sm-4.mb-3
+                  = f.input :quantity, as: :integer,  input_html: { value: cart_item.quantity }, class: 'form-control'
+                  = f.submit '点数を更新', class: 'btn btn-outline-secondary'
+              = button_to 'カートから削除', cart_cart_item_path(cart_item), method: :delete, data: { turbo_confirm: t('common.views.confirm.destroy') }, class: 'btn btn-danger mb-3'
+      - else
+        %p カートは空です。
+      .border-bottom
+        %p.mt-3 #{('購入点数')} #{current_cart.total_quantity}
+        %p.mt-3 #{('代引手数料')} #{current_cart.cash_on_delivery}
+        %p.mt-3 #{('送料')} #{current_cart.shipping_fee}
+        %p.mt-3 #{('合計金額')} #{current_cart.final_total_price}
+        

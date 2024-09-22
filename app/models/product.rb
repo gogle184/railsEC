@@ -4,6 +4,8 @@ class Product < ApplicationRecord
     attachable.variant :large, resize_to_limit: [500, 500]
   end
 
+  has_many :cart_items, dependent: :destroy
+
   validates :name, presence: true, uniqueness: true
   validates :price, presence: true, numericality: { only_integer: true, less_than: 1_000_000 }
   validates :description, presence: true, length: { maximum: 10000 }

@@ -4,6 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  has_one :cart, dependent: :destroy
+
   validates :display_name, presence: true, length: { maximum: 30 }, uniqueness: true
   validates :name, presence: true, length: { maximum: 30 }
   validates :phone_number, presence: true, numericality: { only_integer: true }
