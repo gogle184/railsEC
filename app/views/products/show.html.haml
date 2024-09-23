@@ -11,10 +11,10 @@
         .fs-4= Product.human_attribute_name(:price)
         %p= number_to_currency(@product.add_tax_price)
         .fs-4= Product.human_attribute_name(:description)
-        = @product.description
+        .mb-3= @product.description
         = simple_form_for :cart_item, url: cart_cart_items_path(current_cart), method: :post do |f|
           = f.hidden_field :product_id, value: @product.id
           .form-group
-            = f.input :quantity, input_html: { min: 1, value: 1 }, class: 'form-control'
+            = f.input :quantity, label: t('activerecord.attributes.cart_item.quantity'), input_html: { min: 1, value: 1 }, class: 'form-control'
           .form-group
             = f.submit 'カートに入れる', class: 'btn btn-primary mt-3'

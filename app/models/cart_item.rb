@@ -3,6 +3,7 @@ class CartItem < ApplicationRecord
   belongs_to :product
 
   validates :quantity, presence: true, numericality: { only_integer: true, greater_than: 0 }
+  validate :validate_puroduct_is_displayed
 
   scope :order_by_oldest, -> { order(:id) }
 
@@ -16,7 +17,9 @@ class CartItem < ApplicationRecord
     cart_item
   end
 
-  def sum_price
-    quantity * product.price
+  private
+
+  def validate_puroduct_is_displayed
+    errors.add(:product, :undisplayed) unless product.display?
   end
 end

@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
       if session[:cart_id]
         guest_cart = Cart.find_by(id: session[:cart_id])
         if guest_cart.present?
-          current_cart.combine_and_destroy_other_cart(guest_cart)
+          current_cart.combine_and_destroy_other_cart!(guest_cart)
           session.delete(:cart_id)
         end
       end
