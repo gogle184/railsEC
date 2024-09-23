@@ -1,32 +1,22 @@
 class Order < ApplicationRecord
+  include OrderWithItems
   belongs_to :user
-  has_many :order_items
+  has_many :order_items, dependent: :destroy
   has_many :products, through: :order_items
 
-  class << self
-    def build_with_order_items(attributes)
-      cart_items = attributes.delete(:cart_items)
-      order = build(attributes)
+  validates :schedule_date, presence: true
+  validate :schedule_date_in_business_range
 
-      cart_items.each do |cart_item|
-        order.order_items.build(
-          product_id: cart_item.product_id,
-          quantity: cart_item.quantity,
-          price: cart_item.product.price
-        )
-      end
-      order.schedule_date ||= nil
-      order.schedule_time ||= nil
-      order
-    end
-  end
+  enum :status, { waiting: 0, shipped: 1, completed: 2, canceled: 3 }
+  enum :schedule_time, { none: 0, eight_twelve: 1, twelve_fourteen: 2, fourteen_sixteen: 3, sixteen_eighteen: 4, eighteen_twenty: 5, twenty_twenty_one: 6 },
+       prefix: :schedule
 
   def tax_included_total_price(no_tax_total_price)
     (no_tax_total_price * 1.10).floor
   end
 
-  def cash_on_delivery(no_tax_total_price)
-    case no_tax_total_price
+  def cash_on_delivery(tax_in_total_price)
+    case tax_in_total_price
     when 0..10_000
       330
     when 10_000..30_000
@@ -42,7 +32,23 @@ class Order < ApplicationRecord
     660 + ((total_quantity / 5).ceil * 660)
   end
 
-  def final_total_price(no_tax_total_price, total_quantity)
-    tax_included_total_price(no_tax_total_price) + cash_on_delivery(no_tax_total_price) + shipping_fee(total_quantity)
+  def final_total_price(tax_in_total_price, total_quantity)
+    tax_in_total_price + cash_on_delivery(tax_in_total_price) + shipping_fee(total_quantity)
+  end
+
+  def self.min_schedule_date
+    3.business_days.from_now.to_date
+  end
+
+  def self.max_schedule_date
+    14.business_days.from_now.to_date
+  end
+
+  private
+
+  def schedule_date_in_business_range
+    if schedule_date.present? && (schedule_date < 3.business_days.from_now.to_date || schedule_date > 14.business_days.from_now.to_date)
+      errors.add(:schedule_date, :unrange)
+    end
   end
 end

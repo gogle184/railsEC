@@ -2,8 +2,8 @@
   .row.mb-3
     .col-10
       = link_to t('common.view.action.back'), cart_path, class: 'btn btn-primary'
-      %h1.mb-3= t('confirm')
-      - no_tax_total_price = 0
+      %h1.mb-3= t('order.confirm.title')
+      - tax_in_total_price = 0
       - total_quantity = 0
       - @order.order_items.each do |order_item|
         .d-flex.mb-3.border-bottom
@@ -12,12 +12,27 @@
           .col-md-7.ms-5
             %h5= order_item.product.name
             %p= number_to_currency(order_item.product.add_tax_price)
-            %p #{t('cart.show.quantity')} #{order_item.quantity}
-          - no_tax_total_price += order_item.price * order_item.quantity
+            %p #{OrderItem.human_attribute_name(:quantity)} #{order_item.quantity}
+          - tax_in_total_price += order_item.tax_in_price * order_item.quantity
           - total_quantity += order_item.quantity
       %p.mt-3 #{t('common.view.sub.total_quantity')} #{total_quantity}
-      %p.mt-3 #{t('common.view.sub.tax_included_total_price')} #{number_to_currency(@order.tax_included_total_price(no_tax_total_price))}
-      %p.mt-3 #{t('common.view.sub.cash_on_delivery')} #{number_to_currency(@order.cash_on_delivery(no_tax_total_price))}
+      %p.mt-3 #{t('common.view.sub.tax_included_total_price')} #{number_to_currency(tax_in_total_price)}
+      %p.mt-3 #{t('common.view.sub.cash_on_delivery')} #{number_to_currency(@order.cash_on_delivery(tax_in_total_price))}
       %p.mt-3 #{t('common.view.sub.shipping_fee')} #{number_to_currency(@order.shipping_fee(total_quantity))}
-      %p.mt-3 #{t('common.view.sub.total_price')} #{number_to_currency(@order.final_total_price(no_tax_total_price, total_quantity))}
-      = link_to '注文する', '#', class: 'btn btn-primary'
+      %p.mt-3 #{t('common.view.sub.total_price')} #{number_to_currency(@order.final_total_price(tax_in_total_price, total_quantity))}
+      %h2.mt-3= t('order.confirm.send_information')
+      %p.mt-3 #{User.human_attribute_name(:name)} #{current_user.name}
+      %p.mt-3 #{User.human_attribute_name(:postal_code)} #{current_user.postal_code}
+      %p.mt-3 #{User.human_attribute_name(:address)} #{current_user.address}
+      = simple_form_for @order, url: order_path do |f|
+        .form-group.mb-3
+          = f.label :schedule_date
+          = f.date_field :schedule_date, min: Order.min_schedule_date, max: Order.max_schedule_date, class: 'form-control'
+        .form-group
+          = f.input :schedule_time,
+                    as: :select,
+                    selected: 'none',
+                    collection: Order.schedule_times.keys.map { |k| [I18n.t("enums.order.schedule_time.#{k}"), k] }
+        = f.hidden_field :cash_on_delivery, value: @order.cash_on_delivery(tax_in_total_price)
+        = f.hidden_field :shipping_fee, value: @order.shipping_fee(total_quantity)
+        = f.submit t('order.confirm.create_order'), class: 'btn btn-primary'

@@ -5,6 +5,7 @@ gem 'rails', '~> 7.2.1'
 
 gem 'acts_as_list'
 gem 'bootsnap', require: false
+gem 'business_time'
 gem 'cssbundling-rails'
 gem 'devise'
 gem 'devise-i18n'

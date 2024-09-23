@@ -75,7 +75,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_23_052533) do
     t.bigint "order_id", null: false
     t.bigint "product_id", null: false
     t.integer "quantity", null: false
-    t.integer "price", null: false
+    t.integer "tax_in_price", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["order_id"], name: "index_order_items_on_order_id"
@@ -85,8 +85,10 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_23_052533) do
   create_table "orders", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.integer "status", default: 0, null: false
-    t.date "schedule_date"
-    t.integer "schedule_time"
+    t.date "schedule_date", null: false
+    t.integer "schedule_time", default: 0, null: false
+    t.integer "shipping_fee", null: false
+    t.integer "cash_on_delivery", null: false
     t.datetime "delivered_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

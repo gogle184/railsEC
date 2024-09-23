@@ -110,6 +110,7 @@ ja:
       too_short: は%{count}文字以上で入力してください
       wrong_length: は%{count}文字で入力してください
       undisplayed: がカートに追加できませんでした
+      unrange: は3営業日から14営業日の範囲で選択してください
     template:
       body: 次の項目を確認してください
       header: "%{model}に%{count}個のエラーが発生しました"
@@ -181,6 +182,16 @@ ja:
       long: "%Y/%m/%d %H:%M"
       short: "%m/%d %H:%M"
     pm: 午後
+  enums:
+    order:
+      schedule_time:
+        none: "指定なし"
+        eight_twelve: "8-12"
+        twelve_fourteen: "12-14"
+        fourteen_sixteen: "14-16"
+        sixteen_eighteen: "16-18"
+        eighteen_twenty: "18-20"
+        twenty_twenty_one: "20-21"
   common:
     view:
       header:
@@ -213,6 +224,9 @@ ja:
         failure: "%{model}の更新に失敗しました"
       destroy:
         success: "%{model}を削除しました"
+      order:
+        success: 注文が完了しました
+        failure: 注文に失敗しました
   product:
     index:
       title: 商品一覧
@@ -245,3 +259,8 @@ ja:
       destroy: カートから削除
       need_to_login: 購入するにはログインしてください
       confirm: 購入手続きに進む
+  order:
+    confirm:
+      title: 注文確認
+      create_order: 注文確定
+      send_information: 送付先情報

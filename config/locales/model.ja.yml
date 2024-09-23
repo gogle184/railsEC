@@ -29,6 +29,17 @@ ja:
         product_image: 商品画像
         product_name: 商品名
         product_price: 価格
+      order:
+        status: ステータス
+        cash_on_delivery: 代金手数料
+        shipping_fee: 送料
+        schedule_date: 希望配送日
+        schedule_time: 希望配送時間
+      order_item:
+        quantity: 点数
+        product_image: 商品画像
+        product_name: 商品名
+        product_price: 価格
   booleans:
     product:
       display:
