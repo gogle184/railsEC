@@ -109,6 +109,7 @@ ja:
       too_long: は%{count}文字以内で入力してください
       too_short: は%{count}文字以上で入力してください
       wrong_length: は%{count}文字で入力してください
+      undisplayed: がカートに追加できませんでした
     template:
       body: 次の項目を確認してください
       header: "%{model}に%{count}個のエラーが発生しました"
@@ -195,6 +196,12 @@ ja:
         confirm_delete: 本当に削除しますか？
         show: 詳細
         destroy: 削除
+      sub:
+        tax_included_total_price: 小計
+        cash_on_delivery: 代引手数料
+        shipping_fee: 送料
+        total_quantity: 合計点数
+        total_price: 合計請求金額
     hint:
       tax: 税込価格(価格×1.10)で表示されます。ご注意ください。
     controller:
@@ -230,3 +237,11 @@ ja:
     confirmed_at:
       'true': 認証済
       'false': 未認証
+  cart:
+    show:
+      empty: カートは空です
+      title: カート一覧
+      quantity_update: 点数を更新
+      destroy: カートから削除
+      need_to_login: 購入するにはログインしてください
+      confirm: 購入手続きに進む

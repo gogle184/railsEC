@@ -13,11 +13,15 @@
       - elsif user_signed_in?
         .navbar-text.me-3
           = t('common.view.header.user_name', name: current_user.display_name)
+        = link_to cart_path, class: 'btn btn-primary me-3' do
+          %i.fa-solid.fa-cart-shopping
         = link_to t('common.views.header.users.my_page'), edit_user_registration_path, class: 'btn btn-primary me-3'
         = link_to t('common.views.header.users.order_history'), '#', class: 'btn btn-primary me-3'
         = button_to t('common.view.header.logout'), destroy_user_session_path, method: :delete,
                                                                                data: { turbo_confirm: t('common.view.header.confirm_logout') },
                                                                                class: 'btn btn-primary'
       - else
+        = link_to cart_path, class: 'btn btn-primary me-3' do
+          %i.fa-solid.fa-cart-shopping
         = link_to t('common.view.header.log_in'), new_user_session_path, class: 'btn btn-primary me-3'
         = link_to t('common.view.header.sign_up'), new_user_registration_path, class: 'btn btn-primary'

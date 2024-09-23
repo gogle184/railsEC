@@ -1,2 +1,12 @@
-%h1 Top#index
-%p Find me in app/views/top/index.html.haml
+.container
+  .row.row-cols-lg-4
+    - @products.each do |product|
+      .card.p-0.mb-3
+        .card-img-top
+          = link_to product_path(product) do
+            = product_image_tag(product, :small)
+        .card-body
+          .card-title
+            = product.name
+          .card-text
+            = number_to_currency(product.add_tax_price)

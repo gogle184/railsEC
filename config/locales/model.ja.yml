@@ -4,6 +4,8 @@ ja:
       admin: 管理者
       user: ユーザー
       product: 商品
+      cart: カート
+      cart_item: カートアイテム
     attributes:
       admin:
         email: メールアドレス
@@ -22,6 +24,11 @@ ja:
         description: 商品説明
         image: 商品画像
         display: 公開フラグ
+      cart_item:
+        quantity: 点数
+        product_image: 商品画像
+        product_name: 商品名
+        product_price: 価格
   booleans:
     product:
       display:
