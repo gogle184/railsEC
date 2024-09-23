@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_one :cart, dependent: :destroy
+  has_many :orders, dependent: :destroy
 
   validates :display_name, presence: true, length: { maximum: 30 }, uniqueness: true
   validates :name, presence: true, length: { maximum: 30 }

@@ -1,0 +1,23 @@
+.container
+  .row.mb-3
+    .col-10
+      = link_to t('common.view.action.back'), cart_path, class: 'btn btn-primary'
+      %h1.mb-3= t('confirm')
+      - no_tax_total_price = 0
+      - total_quantity = 0
+      - @order.order_items.each do |order_item|
+        .d-flex.mb-3.border-bottom
+          .col-md-2
+            = product_image_tag(order_item.product, :small)
+          .col-md-7.ms-5
+            %h5= order_item.product.name
+            %p= number_to_currency(order_item.product.add_tax_price)
+            %p #{t('cart.show.quantity')} #{order_item.quantity}
+          - no_tax_total_price += order_item.price * order_item.quantity
+          - total_quantity += order_item.quantity
+      %p.mt-3 #{t('common.view.sub.total_quantity')} #{total_quantity}
+      %p.mt-3 #{t('common.view.sub.tax_included_total_price')} #{number_to_currency(@order.tax_included_total_price(no_tax_total_price))}
+      %p.mt-3 #{t('common.view.sub.cash_on_delivery')} #{number_to_currency(@order.cash_on_delivery(no_tax_total_price))}
+      %p.mt-3 #{t('common.view.sub.shipping_fee')} #{number_to_currency(@order.shipping_fee(total_quantity))}
+      %p.mt-3 #{t('common.view.sub.total_price')} #{number_to_currency(@order.final_total_price(no_tax_total_price, total_quantity))}
+      = link_to '注文する', '#', class: 'btn btn-primary'
