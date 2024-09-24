@@ -1,12 +1,12 @@
 .container
-  = link_to t('common.views.action.back'), users_orders_path, class: 'btn btn-primary mb-3'
-  %h1.mt-2= t('orders.show.title')
+  = link_to t('common.view.action.back'), users_orders_path, class: 'btn btn-primary mb-3'
+  %h1.mt-2= t('order.show.title')
   .row.justify-content-center
     .col-10
       .card.mt-3
         .card-body
           %p #{Order.human_attribute_name(:created_at)} #{l(@order.created_at, format: :full_date)}
-          %p #{Order.human_attribute_name(:status)} #{t("enums.order.status.#{@order.status}")}
+          %p #{Order.human_attribute_name(:status)} #{order_processing_status(@order)}
           %p #{Order.human_attribute_name(:delivered_time)} #{@order.delivered_time}
           %p #{Order.human_attribute_name(:schedule_date)} #{@order.schedule_date}
           %p #{Order.human_attribute_name(:schedule_time)} #{t("enums.order.schedule_time.#{@order.schedule_time}")}
@@ -32,6 +32,6 @@
           .text-end
             %p.mt-3 #{t('common.view.sub.total_quantity')} #{@order.total_quantity}
             %p.mt-3 #{t('common.view.sub.tax_included_total_price')} #{number_to_currency(@order.total_price)}
-            %p.mt-3 #{t('common.view.sub.cash_on_delivery')} #{@order.cash_on_delivery}
-            %p.mt-3 #{t('common.view.sub.shipping_fee')} #{@order.shipping_fee}
+            %p.mt-3 #{t('common.view.sub.cash_on_delivery')} #{number_to_currency(@order.cash_on_delivery)}
+            %p.mt-3 #{t('common.view.sub.shipping_fee')} #{number_to_currency(@order.shipping_fee)}
             %p.mt-3 #{t('common.view.sub.total_price')} #{number_to_currency(@order.final_sub_total_price(@order))}

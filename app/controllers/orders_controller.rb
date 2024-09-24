@@ -11,7 +11,8 @@ class OrdersController < ApplicationController
     @order.build_with_cart_items(current_cart.cart_items)
 
     if @order.save
-      current_cart.destroy
+      current_cart.destroy!
+      UserMailer.order_accepted(@order).deliver_later
       redirect_to root_path, notice: t('common.controller.order.success')
     else
       flash.now[:alert] = t('common.view.controller.order.failed')

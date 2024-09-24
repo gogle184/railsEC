@@ -33,6 +33,6 @@
                     as: :select,
                     selected: 'none',
                     collection: Order.schedule_times.keys.map { |k| [I18n.t("enums.order.schedule_time.#{k}"), k] }
-        = f.hidden_field :cash_on_delivery, value: @order.cash_on_delivery(tax_in_total_price)
-        = f.hidden_field :shipping_fee, value: @order.shipping_fee(total_quantity)
+        = f.hidden_field :cash_on_delivery, value: @order.cash_on_delivery_method(tax_in_total_price)
+        = f.hidden_field :shipping_fee, value: @order.shipping_fee_method(total_quantity)
         = f.submit t('order.confirm.create_order'), class: 'btn btn-primary'

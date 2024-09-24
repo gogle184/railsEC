@@ -39,20 +39,20 @@ RSpec.describe Order, type: :model do
     end
   end
 
-  describe '#cash_on_delivery' do
+  describe '#cash_on_delivery_method' do
     it '1万円未満で330円の代引き手数料を返す' do
-      expect(order.cash_on_delivery(9999)).to eq 330
+      expect(order.cash_on_delivery_method(9999)).to eq 330
     end
 
     it '1万円以上3万円未満で440円の代引き手数料を返す' do
-      expect(order.cash_on_delivery(10000)).to eq 440
+      expect(order.cash_on_delivery_method(10000)).to eq 440
     end
   end
 
-  describe '#shipping_fee' do
+  describe '#shipping_fee_method' do
     it '5つごとに660円加算されること' do
       total_quantity = 7
-      expect(order.shipping_fee(total_quantity)).to eq 1320
+      expect(order.shipping_fee_method(total_quantity)).to eq 1320
     end
   end
 

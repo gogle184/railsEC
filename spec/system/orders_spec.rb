@@ -33,9 +33,12 @@ RSpec.describe 'Orders', type: :system do
 
       fill_in 'order[schedule_date]', with: 3.business_days.from_now.to_date
       select '12-14', from: 'order[schedule_time]'
-      click_on '注文確定'
 
-      expect(page).to have_content '注文が完了しました'
+      expect do
+        click_on '注文確定'
+        expect(page).to have_content '注文が完了しました'
+        user.reload
+      end.to have_enqueued_mail(UserMailer, :order_accepted).with(user.orders.last).once
     end
   end
 end
