@@ -17,8 +17,8 @@
           - total_quantity += order_item.quantity
       %p.mt-3 #{t('common.view.sub.total_quantity')} #{total_quantity}
       %p.mt-3 #{t('common.view.sub.tax_included_total_price')} #{number_to_currency(tax_in_total_price)}
-      %p.mt-3 #{t('common.view.sub.cash_on_delivery')} #{number_to_currency(@order.cash_on_delivery(tax_in_total_price))}
-      %p.mt-3 #{t('common.view.sub.shipping_fee')} #{number_to_currency(@order.shipping_fee(total_quantity))}
+      %p.mt-3 #{t('common.view.sub.cash_on_delivery')} #{number_to_currency(@order.cash_on_delivery_method(tax_in_total_price))}
+      %p.mt-3 #{t('common.view.sub.shipping_fee')} #{number_to_currency(@order.shipping_fee_method(total_quantity))}
       %p.mt-3 #{t('common.view.sub.total_price')} #{number_to_currency(@order.final_total_price(tax_in_total_price, total_quantity))}
       %h2.mt-3= t('order.confirm.send_information')
       %p.mt-3 #{User.human_attribute_name(:name)} #{current_user.name}

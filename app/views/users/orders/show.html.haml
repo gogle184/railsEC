@@ -1,0 +1,37 @@
+.container
+  = link_to t('common.views.action.back'), users_orders_path, class: 'btn btn-primary mb-3'
+  %h1.mt-2= t('orders.show.title')
+  .row.justify-content-center
+    .col-10
+      .card.mt-3
+        .card-body
+          %p #{Order.human_attribute_name(:created_at)} #{l(@order.created_at, format: :full_date)}
+          %p #{Order.human_attribute_name(:status)} #{t("enums.order.status.#{@order.status}")}
+          %p #{Order.human_attribute_name(:delivered_time)} #{@order.delivered_time}
+          %p #{Order.human_attribute_name(:schedule_date)} #{@order.schedule_date}
+          %p #{Order.human_attribute_name(:schedule_time)} #{t("enums.order.schedule_time.#{@order.schedule_time}")}
+          %p #{User.human_attribute_name(:name)} #{@order.user.name}
+          %p #{User.human_attribute_name(:postal_code)} #{@order.user.postal_code}
+          %p #{User.human_attribute_name(:address)} #{@order.user.address}
+          .table-responsive
+            %table.table.text-center
+              %thead
+                %tr
+                  %th= OrderItem.human_attribute_name(:product_image)
+                  %th= OrderItem.human_attribute_name(:product_name)
+                  %th= OrderItem.human_attribute_name(:price)
+                  %th= OrderItem.human_attribute_name(:quantity)
+                %tbody
+                  - @order.order_items.each do |order_item|
+                    %tr
+                      %td
+                        = product_image_tag(order_item.product, :small)
+                      %td= order_item.product.name
+                      %td= number_to_currency(order_item.tax_in_price)
+                      %td= order_item.quantity
+          .text-end
+            %p.mt-3 #{t('common.view.sub.total_quantity')} #{@order.total_quantity}
+            %p.mt-3 #{t('common.view.sub.tax_included_total_price')} #{number_to_currency(@order.total_price)}
+            %p.mt-3 #{t('common.view.sub.cash_on_delivery')} #{@order.cash_on_delivery}
+            %p.mt-3 #{t('common.view.sub.shipping_fee')} #{@order.shipping_fee}
+            %p.mt-3 #{t('common.view.sub.total_price')} #{number_to_currency(@order.final_sub_total_price(@order))}
