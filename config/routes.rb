@@ -7,6 +7,10 @@ Rails.application.routes.draw do
   namespace :admins do
     resources :products
     resources :users, only: %i[index show edit update destroy]
+    resources :orders, only: %i[index show update]
+  end
+  namespace :users do
+    resources :orders, only: %i[index show]
   end
   devise_for :users, controllers: {
     registrations: 'users/registrations',
@@ -14,10 +18,13 @@ Rails.application.routes.draw do
     confirmations: 'users/confirmations',
     passwords: 'users/passwords',
   }
+  resources :products, only: %i[show]
   resource :cart, only: %i[show] do
     resources :cart_items, module: :cart, only: %i[create update destroy]
   end
-  resources :products, only: %i[show]
+  resource :order, only: %i[create] do
+    get :confirm
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

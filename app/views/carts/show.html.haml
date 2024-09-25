@@ -24,7 +24,7 @@
         %p.mt-3 #{t('common.view.sub.shipping_fee')} #{number_to_currency(current_cart.shipping_fee)}
         %p.mt-3 #{t('common.view.sub.total_price')} #{number_to_currency(current_cart.final_total_price)}
         - if user_signed_in?
-          = link_to t('cart.show.confirm'), '#', class: 'btn btn-primary'
+          = link_to t('cart.show.confirm'), confirm_order_path, class: 'btn btn-primary'
         - else
           = link_to t('cart.show.need_to_login'), new_user_session_path, class: 'btn btn-primary'
       - else

@@ -1,0 +1,18 @@
+= t('mailer.user_mailer.order_shipped.intro_body_html', name: @order.user.name)
+%p ------------------------------
+- @order.order_items.each do |order_item|
+  = order_item.product.name
+  %br
+  #{OrderItem.human_attribute_name(:price)}: #{number_to_currency(order_item.tax_in_price)}
+  %br
+  #{OrderItem.human_attribute_name(:quantity)}: #{order_item.quantity}
+  %br
+  %br
+%p ------------------------------
+%p #{Order.human_attribute_name(:schedule_date)} #{@order.schedule_date}
+%p #{Order.human_attribute_name(:schedule_time)} #{t("enums.order.schedule_time.#{@order.schedule_time}")}
+%p #{t('common.view.sub.cash_on_delivery')} #{number_to_currency(@order.cash_on_delivery)}
+%p #{t('common.view.sub.shipping_fee')} #{number_to_currency(@order.shipping_fee)}
+%p #{t('common.view.sub.total_quantity')} #{@order.total_quantity}
+%p #{t('common.view.sub.total_price')} #{number_to_currency(@order.final_sub_total_price(@order))}
+= t('mailer.user_mailer.order_shipped.closing_body_html')
