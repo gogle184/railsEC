@@ -7,10 +7,5 @@ FactoryBot.define do
     postal_code { '0001111' }
     address { 'H県H市' }
     password { 'password' }
-    confirmed_at { Time.current }
-
-    trait :unconfirmed_user do
-      confirmed_at { nil }
-    end
   end
 end

@@ -1,0 +1,4 @@
+.container
+  = link_to t('common.view.action.back'), admins_user_path(@user), class: 'btn btn-primary'
+  %h1.mb-3= t('user.edit.title')
+  = render 'form', user: @user

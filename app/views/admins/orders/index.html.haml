@@ -1,0 +1,25 @@
+
+.container
+  %h1.mt-2= t('order.index.title')
+  .row.justify-content-center
+    .col-10
+      .table-responsive
+        %table.table.text-center
+          %thead
+            %tr
+              %th= Order.human_attribute_name(:created_at)
+              %th= Order.human_attribute_name(:status)
+              %th= Order.human_attribute_name(:delivered_time)
+              %th= Order.human_attribute_name(:schedule_date)
+              %th= Order.human_attribute_name(:schedule_time)
+              %th
+          %tbody
+            - @orders.each do |order|
+              %tr
+                %td= l(order.created_at, format: :full_date)
+                %td= order_processing_status(order)
+                %td= order.delivered_time
+                %td= order.schedule_date
+                %td= t("enums.order.schedule_time.#{order.schedule_time}")
+                %td
+                  = link_to t('common.view.action.show'), admins_order_path(order)

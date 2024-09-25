@@ -1,2 +1,14 @@
-%h1 Admins::Products#index
-%p Find me in app/views/admins/products/index.html.haml
+.container
+  %h1.mt-2= t('product.index.title')
+  = link_to t('product.new.title'), new_admins_product_path, class: 'btn btn-primary mb-4'
+  .row.row-cols-lg-4{ data: { controller: 'sortable', 'sortable-resource-name-value': 'product' } }
+    - @products.each do |product|
+      .card.p-0.mb-3{ data: { 'sortable-update-url': admins_product_path(product) } }
+        .card-img-top
+          = link_to admins_product_path(product) do
+            = product_image_tag(product, :small)
+        .card-body
+          .card-title
+            = product.name
+          .card-text
+            = number_to_currency(product.add_tax_price)

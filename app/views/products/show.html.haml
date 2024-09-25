@@ -1,0 +1,20 @@
+.container
+  = link_to t('common.view.action.back'), root_path, class: 'btn btn-primary'
+  %h1.mt-3= t('product.show.title')
+  .d-flex.justify-content-start
+    .flex-shrink-0
+      = product_image_tag(@product, :large)
+    .ms-5
+      .fs-2= Product.human_attribute_name(:name)
+      .fs-5= @product.name
+      .mt-3
+        .fs-4= Product.human_attribute_name(:price)
+        %p= number_to_currency(@product.add_tax_price)
+        .fs-4= Product.human_attribute_name(:description)
+        .mb-3= @product.description
+        = simple_form_for :cart_item, url: cart_cart_items_path(current_cart), method: :post do |f|
+          = f.hidden_field :product_id, value: @product.id
+          .form-group
+            = f.input :quantity, label: t('activerecord.attributes.cart_item.quantity'), input_html: { min: 1, value: 1 }, class: 'form-control'
+          .form-group
+            = f.submit 'カートに入れる', class: 'btn btn-primary mt-3'

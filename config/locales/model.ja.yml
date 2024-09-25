@@ -3,6 +3,9 @@ ja:
     models:
       admin: 管理者
       user: ユーザー
+      product: 商品
+      cart: カート
+      cart_item: カートアイテム
     attributes:
       admin:
         email: メールアドレス
@@ -15,3 +18,32 @@ ja:
         address: 住所
         email: メールアドレス
         password: パスワード
+      product:
+        name: 商品名
+        price: 価格
+        description: 商品説明
+        image: 商品画像
+        display: 公開フラグ
+      cart_item:
+        quantity: 点数
+        product_image: 商品画像
+        product_name: 商品名
+        product_price: 価格
+      order:
+        status: ステータス
+        cash_on_delivery: 代金手数料
+        shipping_fee: 送料
+        schedule_date: 希望配送日
+        schedule_time: 希望配送時間
+        delivered_time: 配送完了日時
+        created_at: 注文日時
+      order_item:
+        quantity: 点数
+        product_image: 商品画像
+        product_name: 商品名
+        price: 価格
+  booleans:
+    product:
+      display:
+        true: 公開済み
+        false: 非公開

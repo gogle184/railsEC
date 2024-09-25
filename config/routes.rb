@@ -4,14 +4,26 @@ Rails.application.routes.draw do
                       controllers: {
                         sessions: 'admins/sessions',
                       }
+  namespace :admins do
+    resources :products
+    resources :users, only: %i[index show edit update destroy]
+    resources :orders, only: %i[index show update]
+  end
+  namespace :users do
+    resources :orders, only: %i[index show]
+  end
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     sessions: 'users/sessions',
     confirmations: 'users/confirmations',
     passwords: 'users/passwords',
   }
-  namespace :admins do
-    resources :products
+  resources :products, only: %i[show]
+  resource :cart, only: %i[show] do
+    resources :cart_items, module: :cart, only: %i[create update destroy]
+  end
+  resource :order, only: %i[create] do
+    get :confirm
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

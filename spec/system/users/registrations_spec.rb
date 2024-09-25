@@ -14,14 +14,8 @@ RSpec.describe 'Users::Resistrations', type: :system do
       fill_in 'user[password_confirmation]', with: 'password'
       click_on 'アカウント登録'
 
+      expect(page).to have_content 'アカウント登録が完了しました。'
       expect(page).to have_current_path root_path
-
-      confirmation_email = ActionMailer::Base.deliveries.last
-      expect(confirmation_email.to).to eq(['example@example.com'])
-      confirmation_link = URI::DEFAULT_PARSER.extract(confirmation_email.body.to_s, :http).find { |link| link.include?('confirmation_token=') }
-      visit confirmation_link
-      expect(page).to have_content 'メールアドレスが確認できました'
-      expect(page).to have_current_path new_user_session_path
     end
   end
 end

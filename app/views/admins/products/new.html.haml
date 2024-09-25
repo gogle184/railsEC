@@ -1,0 +1,4 @@
+.container
+  = link_to t('common.view.action.back'), admins_products_path, class: 'btn btn-primary'
+  %h1.mb-3= t('product.new.title')
+  = render 'form', product: @product

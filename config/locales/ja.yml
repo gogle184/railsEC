@@ -109,6 +109,8 @@ ja:
       too_long: は%{count}文字以内で入力してください
       too_short: は%{count}文字以上で入力してください
       wrong_length: は%{count}文字で入力してください
+      undisplayed: がカートに追加できませんでした
+      unrange: は3営業日から14営業日の範囲で選択してください
     template:
       body: 次の項目を確認してください
       header: "%{model}に%{count}個のエラーが発生しました"
@@ -179,7 +181,23 @@ ja:
       default: "%Y年%m月%d日(%a) %H時%M分%S秒 %z"
       long: "%Y/%m/%d %H:%M"
       short: "%m/%d %H:%M"
+      full_date: "%Y年%m月%d日"
     pm: 午後
+  enums:
+    order:
+      schedule_time:
+        none: "指定なし"
+        eight_twelve: "8-12"
+        twelve_fourteen: "12-14"
+        fourteen_sixteen: "14-16"
+        sixteen_eighteen: "16-18"
+        eighteen_twenty: "18-20"
+        twenty_twenty_one: "20-21"
+      status:
+        waiting: "処理中"
+        shipped: "配送中"
+        completed: "配達済"
+        canceled: "キャンセル済"
   common:
     view:
       header:
@@ -188,3 +206,170 @@ ja:
         logout: ログアウト
         confirm_logout: ログアウトしますか？
         user_name: "%{name}"
+        user_management: ユーザー管理
+        product_management: 商品管理
+        order_management: 注文管理
+      action:
+        back: 戻る
+        confirm_delete: 本当に削除しますか？
+        show: 詳細
+        destroy: 削除
+      sub:
+        tax_included_total_price: 小計
+        cash_on_delivery: 代引手数料
+        shipping_fee: 送料
+        total_quantity: 合計点数
+        total_price: 合計請求金額
+    hint:
+      tax: 税込価格(価格×1.10)で表示されます。ご注意ください。
+    controller:
+      create:
+        success: "%{model}を登録しました"
+        failure: "%{model}の登録に失敗しました"
+      update:
+        success: "%{model}を更新しました"
+        failure: "%{model}の更新に失敗しました"
+      destroy:
+        success: "%{model}を削除しました"
+      order:
+        success: 注文が完了しました
+        failure: 注文に失敗しました
+        update:
+          success: ステータスを更新しました
+          failure: ステータスの更新に失敗しました
+  mailer:
+    user_mailer:
+      order_accepted:
+        subject: 【自動送信】ご注文を承りました
+        intro_body_html: |
+          <p> %{name} 様 </p>
+          この度はご注文いただき、誠にありがとうございます。
+          <br/>
+          <br/>
+          以下商品明細になります。
+        closing_body_html: |
+          商品発送まで、今しばらくお待ちください。
+          <br/>
+          ******************************
+          <br/>
+          さくらマーケット
+          <br/>
+          所在地: hogehoge
+          <br/>
+          電話番号: 123-4567-8901
+          <br/>
+          メールアドレス: sakura-market@example.com
+          <br/>
+      order_shipped:
+        subject: 【自動送信】商品を発送しました
+        intro_body_html: |
+          <p> %{name} 様 </p>
+          この度はご注文いただき、誠にありがとうございました。
+          <br/>
+          商品を発送させていただきましたのでお知らせします。
+          <br/>
+          <br/>
+          以下注文明細になります。
+        closing_body_html: |
+          ご不明な点がございましたら、お気軽にお問い合わせください。
+          <br/>
+          今後ともさくらマーケットをよろしくお願いいたします。
+          <br/>
+          ******************************
+          <br/>
+          さくらマーケット
+          <br/>
+          所在地: hogehoge
+          <br/>
+          電話番号: 123-4567-8901
+          <br/>
+          メールアドレス: sakura-market@example.com
+      order_completed:
+        subject: 【自動送信】商品をお届けしました
+        intro_body_html: |
+          <p> %{name} 様 </p>
+          この度はご注文いただき、誠にありがとうございました。
+          <br/>
+          商品をお届けいたしましたのでお知らせします。
+          <br/>
+          <br/>
+          以下注文明細になります。
+        closing_body_html: |
+          ご不明な点がございましたら、お気軽にお問い合わせください。
+          <br/>
+          今後ともさくらマーケットをよろしくお願いいたします。
+          <br/>
+          ******************************
+          <br/>
+          さくらマーケット
+          <br/>
+          所在地: hogehoge
+          <br/>
+          電話番号: 123-4567-8901
+          <br/>
+          メールアドレス: sakura-market@example.com
+      order_canceled:
+        subject: 【自動送信】注文をキャンセルしました
+        intro_body_html: |
+          <p> %{name} 様 </p>
+          注文をキャンセルさせていただきましたのでお知らせします。
+          <br/>
+          <br/>
+          以下注文明細になります。
+        closing_body_html: |
+          ご不明な点がございましたら、お気軽にお問い合わせください。
+          <br/>
+          今後ともさくらマーケットをよろしくお願いいたします。
+          <br/>
+          ******************************
+          <br/>
+          さくらマーケット
+          <br/>
+          所在地: hogehoge
+          <br/>
+          電話番号: 123-4567-8901
+          <br/>
+          メールアドレス:
+  product:
+    index:
+      title: 商品一覧
+    new:
+      title: 商品登録
+    show:
+      title: 商品詳細
+    edit:
+      title: 商品編集
+    destroy:
+      title: 商品削除
+  user:
+    index:
+      title: ユーザー一覧
+    show:
+      title: ユーザー詳細
+    edit:
+      title: ユーザー編集
+      target_user: "編集ユーザー: %{name}"
+    destroy:
+      title: ユーザー削除
+    confirmed_at:
+      'true': 認証済
+      'false': 未認証
+  cart:
+    show:
+      empty: カートは空です
+      title: カート一覧
+      quantity_update: 点数を更新
+      destroy: カートから削除
+      need_to_login: 購入するにはログインしてください
+      confirm: 購入手続きに進む
+  order:
+    confirm:
+      title: 注文確認
+      create_order: 注文確定
+      send_information: 送付先情報
+    index:
+      title: 注文一覧
+    show:
+      title: 注文詳細
+      update_status: ステータスを更新する
+      update_status_confirm: ステータスを更新します。よろしいですか？
