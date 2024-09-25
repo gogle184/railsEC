@@ -38,5 +38,6 @@
             = form_with model: @order, url: admins_order_path(@order), method: :patch, local: true do |f|
               .form-group.mb-3
                 = f.label :status, Order.human_attribute_name(:status)
-                = f.select :status, options_for_select(Order.statuses.keys.map { |status| [t("enums.order.status.#{status}"), status] }, @order.status), class: 'form-select'
+                = f.select :status, options_for_select(Order.statuses.keys.map { |status| [t("enums.order.status.#{status}"), status] }, @order.status),
+                           class: 'form-select'
               = f.submit t('order.show.update_status'), class: 'btn btn-success', data: { turbo_confirm: t('order.show.update_status_confirm') }
