@@ -53,4 +53,57 @@ RSpec.describe 'Admins::Orders', type: :system do
       expect(page).to have_button 'ステータスを更新する'
     end
   end
+
+  describe '更新' do
+    it '注文のステータスを配送中に更新でき、shippedメールが飛ぶこと' do
+      user = create(:user)
+      product_first = create(:product, name: '商品3', price: 1_000)
+      order = create(:order, user:, cash_on_delivery: 330, shipping_fee: 660, schedule_time: 1)
+      order.order_items.create!(product: product_first, quantity: 1, tax_in_price: 1_100)
+
+      visit admins_order_path(order)
+      select '配送中', from: 'order_status'
+
+      expect do
+        click_button 'ステータスを更新する'
+        expect(page).to have_content 'ステータスを更新しました'
+        expect(page).to have_content 'ステータス 配送中'
+        expect(find_by_id('order_status').value).to eq 'shipped'
+      end.to have_enqueued_mail(UserMailer, :order_shipped).with(user.orders.last).once
+    end
+
+    it '注文のステータスを配達済に更新でき、completedメールが飛ぶこと' do
+      user = create(:user)
+      product_first = create(:product, name: '商品4', price: 1_000)
+      order = create(:order, user:, cash_on_delivery: 330, shipping_fee: 660, schedule_time: 1)
+      order.order_items.create!(product: product_first, quantity: 1, tax_in_price: 1_100)
+
+      visit admins_order_path(order)
+      select '配達済', from: 'order_status'
+
+      expect do
+        click_button 'ステータスを更新する'
+        expect(page).to have_content 'ステータスを更新しました'
+        expect(page).to have_content 'ステータス 配達済'
+        expect(find_by_id('order_status').value).to eq 'completed'
+      end.to have_enqueued_mail(UserMailer, :order_completed).with(user.orders.last).once
+    end
+
+    it '注文のステータスをキャンセル済に更新でき、canceledメールが飛ぶこと' do
+      user = create(:user)
+      product_first = create(:product, name: '商品5', price: 1_000)
+      order = create(:order, user:, cash_on_delivery: 330, shipping_fee: 660, schedule_time: 1)
+      order.order_items.create!(product: product_first, quantity: 1, tax_in_price: 1_100)
+
+      visit admins_order_path(order)
+      select 'キャンセル済', from: 'order_status'
+
+      expect do
+        click_button 'ステータスを更新する'
+        expect(page).to have_content 'ステータスを更新しました'
+        expect(page).to have_content 'ステータス キャンセル済'
+        expect(find_by_id('order_status').value).to eq 'canceled'
+      end.to have_enqueued_mail(UserMailer, :order_canceled).with(user.orders.last).once
+    end
+  end
 end

@@ -68,7 +68,6 @@ class Order < ApplicationRecord
     end
   end
 
-  # TODO: ステータスごとの処理の追加
   def handle_status_change
     return unless status_changed?
 
@@ -77,6 +76,9 @@ class Order < ApplicationRecord
       UserMailer.order_shipped(self).deliver_later
     when 'completed'
       self.delivered_time = Time.current
+      UserMailer.order_completed(self).deliver_later
+    when 'canceled'
+      UserMailer.order_canceled(self).deliver_later
     end
   end
 end
