@@ -63,4 +63,40 @@ RSpec.describe Order, type: :model do
       expect(order.final_total_price(tax_in_total_price, total_quantity)).to eq 2090
     end
   end
+
+  describe '#handle_status_change' do
+    it 'shippedを受け取るとshippedメールが飛ぶこと' do
+      order.save
+      expect do
+        order.update(status: 'shipped')
+      end.to have_enqueued_mail(UserMailer, :order_shipped).with(order).once
+    end
+
+    it 'completedを受け取るとcompletedメールが飛ぶこと' do
+      order.save
+      expect do
+        order.update(status: 'completed')
+      end.to have_enqueued_mail(UserMailer, :order_completed).with(order).once
+    end
+
+    it 'canceledを受け取るとcanceledメールが飛ぶこと' do
+      order.save
+      expect do
+        order.update(status: 'canceled')
+      end.to have_enqueued_mail(UserMailer, :order_canceled).with(order).once
+    end
+
+    it 'statusが変更されていない場合はメールが飛ばないこと' do
+      order.save
+      expect do
+        order.update(status: 'waiting')
+      end.not_to have_enqueued_mail(UserMailer, :order_shipped)
+      expect do
+        order.update(status: 'waiting')
+      end.not_to have_enqueued_mail(UserMailer, :order_completed)
+      expect do
+        order.update(status: 'waiting')
+      end.not_to have_enqueued_mail(UserMailer, :order_cancelled)
+    end
+  end
 end
