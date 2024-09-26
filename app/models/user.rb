@@ -6,6 +6,10 @@ class User < ApplicationRecord
 
   has_one :cart, dependent: :destroy
   has_many :orders, dependent: :destroy
+  has_many :diaries, dependent: :destroy
+  has_many :favorites, dependent: :destroy
+  has_many :favorite_diaries, through: :favorites, source: :diary
+  has_many :comments, dependent: :destroy
 
   validates :display_name, presence: true, length: { maximum: 30 }, uniqueness: true
   validates :name, presence: true, length: { maximum: 30 }

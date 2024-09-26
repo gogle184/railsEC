@@ -209,11 +209,17 @@ ja:
         user_management: ユーザー管理
         product_management: 商品管理
         order_management: 注文管理
+        product: 商品一覧
+        diary: 投稿一覧
+        my_page: マイページ
+        order_history: 注文履歴
       action:
         back: 戻る
         confirm_delete: 本当に削除しますか？
         show: 詳細
         destroy: 削除
+        new: 新規作成
+        edit: 編集
       sub:
         tax_included_total_price: 小計
         cash_on_delivery: 代引手数料

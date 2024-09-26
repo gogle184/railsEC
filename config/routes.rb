@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   end
   namespace :users do
     resources :orders, only: %i[index show]
+    resources :diaries
   end
   devise_for :users, controllers: {
     registrations: 'users/registrations',
@@ -18,7 +19,7 @@ Rails.application.routes.draw do
     confirmations: 'users/confirmations',
     passwords: 'users/passwords',
   }
-  resources :products, only: %i[show]
+  resources :products, only: %i[index show]
   resource :cart, only: %i[show] do
     resources :cart_items, module: :cart, only: %i[create update destroy]
   end

@@ -1,0 +1,30 @@
+.container
+  = link_to t('common.view.action.back'), users_diaries_path, class: 'btn btn-primary mb-3'
+  %h1= @diary.title
+  .d-flex.gap-3.mb-3
+    = link_to t('common.view.action.edit'), edit_users_diary_path(@diary), class: 'btn btn-primary mb-3'
+    = button_to t('common.view.action.destroy'), users_diary_path(@diary), method: :delete, data: { turbo_confirm: '本当に削除しますか？' }, class: 'btn btn-danger mb-3'
+  .row
+    .col-md-8
+      .card
+        .card-body
+          %p= @diary.content
+          %small
+            投稿者: #{@diary.user.name} | 投稿日時: #{time_ago_in_words(@diary.created_at)}前
+          %div.mb-3
+            %span.badge.bg-success= "#{@diary.favorites.count} いいね"
+            %span.badge.bg-info= "#{@diary.comments.count} コメント"
+          %h3.border-top
+          - if @diary.favorites.any?
+            - @diary.favorites.each do |favorite|
+              %p= favorite.user.display_name
+      %h2 コメント
+      - if @comments.any?
+        - @comments.each do |comment|
+          .card.mb-3
+            .card-body
+              %p= comment.content
+              %small= "投稿者: #{comment.user.display_name} | #{time_ago_in_words(comment.created_at)}前"
+        = paginate @comments
+      - else
+        %p コメントはまだありません。

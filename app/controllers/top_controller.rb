@@ -1,5 +1,5 @@
 class TopController < ApplicationController
   def index
-    @products = Product.displayed.order_by_position
+    @diaries = Diary.displayed.order_by_newest.page(params[:page]).per(5)
   end
 end

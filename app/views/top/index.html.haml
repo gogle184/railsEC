@@ -1,12 +1,17 @@
 .container
-  .row.row-cols-lg-4
-    - @products.each do |product|
-      .card.p-0.mb-3
-        .card-img-top
-          = link_to product_path(product) do
-            = product_image_tag(product, :small)
-        .card-body
-          .card-title
-            = product.name
-          .card-text
-            = number_to_currency(product.add_tax_price)
+  %h1 トップページ
+  .row
+    .col-md-8
+      %h2 最近の日記
+      - @diaries.each do |diary|
+        .card.mb-3
+          .card-header
+            %h5= diary.title
+          .card-body
+            %p= truncate(diary.content, length: 100)
+            %small
+              投稿者: #{diary.user.name} | #{time_ago_in_words(diary.created_at)}前
+            %div
+              %span.badge.bg-success= "#{diary.favorites.count} いいね"
+              %span.badge.bg-info= "#{diary.comments.count} コメント"
+      = paginate @diaries, theme: 'bootstrap-5'

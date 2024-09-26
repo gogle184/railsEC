@@ -20,6 +20,8 @@ gem 'simple_form'
 gem 'sprockets-rails'
 gem 'stimulus-rails'
 gem 'turbo-rails'
+gem 'kaminari'
+gem 'bootstrap5-kaminari-views'
 
 group :development, :test do
   gem 'brakeman', require: false

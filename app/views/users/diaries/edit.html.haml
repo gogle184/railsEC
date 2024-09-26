@@ -1,0 +1,4 @@
+.container
+  = link_to t('common.view.action.back'), users_diary_path(@diary), class: 'btn btn-primary mb-3'
+  %h1 日記を編集
+  = render 'form', diary: @diary

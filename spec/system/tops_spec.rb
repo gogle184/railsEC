@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Tops', type: :system do
   describe '一覧' do
-    it '公開フラグがtrueの商品が表示されること' do
+    it '公開フラグがtrueの投稿が表示されること' do
       create(:product, name: '公開商品', price: 100)
       create(:product, :undisplay, name: '非公開商品', price: 200)
 

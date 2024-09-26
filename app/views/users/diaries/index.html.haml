@@ -1,0 +1,20 @@
+.container
+  %h1 投稿した日記一覧
+  = link_to t('common.view.action.new'), new_users_diary_path, class: 'btn btn-primary mb-3'
+  .row
+    .col-md-8
+      - if @diaries.any?
+        - @diaries.each do |diary|
+          .card.mb-3
+            .card-header
+              %h5= link_to diary.title, users_diary_path(diary)
+            .card-body
+              %p= truncate(diary.content, length: 100)
+              %small
+                投稿日時: #{time_ago_in_words(diary.created_at)}前
+              %div
+                %span.badge.bg-success= "#{diary.favorites.count} いいね"
+                %span.badge.bg-info= "#{diary.comments.count} コメント"
+        = paginate @diaries
+      - else
+        %p= "まだ日記を投稿していません。"
